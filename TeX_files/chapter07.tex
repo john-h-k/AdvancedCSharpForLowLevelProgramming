@@ -171,3 +171,30 @@ The CIL code above can be expressed in a similar C\# Snippet, but instead of cat
 To summarize, the Fault Handler is essentially a catch all clause that only run whenever an exception get thrown.
 
 \subsection{Filter Handling}
+
+Filters provide a way for the developer to decide whether they want to handle an exception based on more than just its type.
+Filter blocks are followed by a handler block, which the filter block decides whether or not to execute. At the end of the filter block, either a true or false value is loaded onto the stack (an int32, not 0 (true) or 0 (false)).
+These are used to implement the C# 'when' functionality for exception Handling
+
+// SNIPPET OF 'WHEN' EXCEPTION FILTER //
+
+A filter block ends with the loading of an integer onto the stack and the 'endfilter' instruction
+It is followed by a handler - in IL, either a 'catch { }' block or just an anoymous '{ }'
+
+// catch { } SNIPPET //
+or
+// { } SNIPPED //
+
+So a full filter block might look like this:
+
+// FILTER SNIPPET //
+
+A false value being loaded means the following handler will not be executed - rather, the exception will continue searching for a handler as if it had never been caught
+
+C# pseudo-code for a filter block (not using 'when')
+
+// SNIPPET //
+
+A dynamic method using filter blocks will do /// i don't know enough to say right now //
+
+// DYNAMIC METHOD SNIPPET //
